@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jiale Tao — UX/UI Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0F0E0C;
+  --cream: #F0EBE0;
+  --terra: #C8633A;
+  --sage: #7A9E7E;
+  --gold: #C9A84C;
+  --muted: rgba(240,235,224,0.45);
+  --card-bg: rgba(255,255,255,0.04);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--cream);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(15,14,12,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav-logo span { color: var(--terra); font-style: italic; }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--cream); }
+
+.nav-cta {
+  background: var(--terra);
+  color: white !important;
+  padding: 9px 20px;
+  border-radius: 100px;
+  font-weight: 500 !important;
+  transition: opacity 0.3s !important;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,99,58,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(122,158,126,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 28px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--terra);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 7vw, 80px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.position-statement {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 44px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--terra);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s, opacity 0.2s;
+  display: inline-block;
+}
+
+.btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--cream);
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: border-color 0.3s, background 0.3s;
+  display: inline-block;
+}
+
+.btn-ghost:hover { border-color: var(--cream); background: rgba(255,255,255,0.05); }
+
+.hero-socials {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.hero-socials::before, .hero-socials::after {
+  content: '';
+  width: 1px;
+  height: 60px;
+  background: rgba(255,255,255,0.15);
+}
+
+.social-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+  transition: color 0.3s;
+}
+
+.social-link:hover { color: var(--terra); }
+
+/* SECTION COMMON */
+section {
+  padding: 100px 60px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 40px;
+  height: 1px;
+  background: var(--terra);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 60px;
+}
+
+/* ABOUT */
+.about {
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.about-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.about-text p + p { margin-top: 16px; }
+
+.about-text strong { color: var(--cream); font-weight: 500; }
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--cream);
+}
+
+.skill-bar-bg {
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skill-bar {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+}
+
+/* WORK */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.work-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.work-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200,99,58,0.3);
+}
+
+.work-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+
+.card-visual {
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-card.featured .card-visual {
+  height: 100%;
+  min-height: 280px;
+}
+
+.nourish-bg {
+  background: linear-gradient(135deg, #3D2B1F 0%, #6B3A28 50%, #C8633A 100%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  color: rgba(255,255,255,0.15);
+  font-style: italic;
+}
+
+.flow-bg {
+  background: linear-gradient(135deg, #1A2A1C 0%, #2D4A30 100%);
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+}
+
+.bloom-bg {
+  background: linear-gradient(135deg, #2A1A2E 0%, #4A2C5A 100%);
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+}
+
+.card-info {
+  padding: 24px 28px;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--cream);
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.card-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--terra);
+  margin-top: 16px;
+  font-weight: 500;
+}
+
+/* CONTACT */
+.contact {
+  text-align: center;
+  background: rgba(200,99,58,0.05);
+  border-top: 1px solid rgba(200,99,58,0.15);
+}
+
+.contact .section-label { justify-content: center; }
+.contact .section-label::after { display: none; }
+
+.contact-email {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 4vw, 48px);
+  font-style: italic;
+  color: var(--terra);
+  text-decoration: none;
+  display: block;
+  margin: 20px 0 40px;
+  transition: opacity 0.3s;
+}
+
+.contact-email:hover { opacity: 0.75; }
+
+.contact-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  padding: 10px 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  transition: all 0.3s;
+}
+
+.contact-link:hover {
+  border-color: var(--terra);
+  color: var(--terra);
+}
+
+/* FOOTER */
+footer {
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px;
+  color: rgba(240,235,224,0.25);
+}
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 24px 60px; }
+  .hero-socials { display: none; }
+  section { padding: 70px 24px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .work-grid { grid-template-columns: 1fr; }
+  .work-card.featured { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Jiale <span>Tao</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">UX/UI Designer · Available for Work</div>
+    <h1>Designing<br/>experiences<br/>that <em>feel right.</em></h1>
+    <p class="position-statement">
+      I'm a UX/UI designer focused on <strong>food, lifestyle, and wellness platforms</strong> — creating digital products that are intuitive, beautiful, and rooted in real user needs. I believe great design is both rigorous and human.
+    </p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">View my work</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-socials">
+    <a href="https://linkedin.com" class="social-link" target="_blank">LinkedIn</a>
+    <a href="https://behance.net" class="social-link" target="_blank">Behance</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title">Design with<br/>purpose &amp; craft.</h2>
+      <div class="about-text">
+        <p>I'm a <strong>final-year design student</strong> with a passion for UX/UI work at the intersection of food, lifestyle, and digital experience. My process is grounded in <strong>research-led thinking</strong> — I start with the user and work outward.</p>
+        <p>Over the past year, I've led end-to-end design projects — from discovery research and journey mapping to high-fidelity prototypes and usability testing. I'm comfortable <strong>working solo</strong> and collaborating in cross-functional teams.</p>
+        <p>Currently building my portfolio and looking for <strong>junior UX/UI roles or design internships</strong> where I can keep growing fast.</p>
+      </div>
+    </div>
+    <div class="skills-list">
+      <div class="skill-item">
+        <div class="skill-header"><span>User Research & Testing</span><span>90%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Figma (UI & Prototyping)</span><span>88%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:88%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Information Architecture</span><span>80%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Design Systems</span><span>75%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>HTML / CSS Basics</span><span>65%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar" style="width:65%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">Projects I'm<br/>proud of.</h2>
+  <div class="work-grid">
+    <a class="work-card featured" href="#">
+      <div class="card-visual">
+        <div class="nourish-bg">nourish.</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tags">
+          <span class="tag">Featured</span>
+          <span class="tag">UX Research</span>
+          <span class="tag">Web Platform</span>
+          <span class="tag">Food & Lifestyle</span>
+        </div>
+        <div class="card-title">Nourish — Meal Planning Web Platform</div>
+        <div class="card-desc">End-to-end UX/UI design for a food & lifestyle web platform helping users discover, save, and plan meals in one place. Increased task completion from 54% to 89% through two rounds of usability testing and iteration.</div>
+        <div class="card-arrow">View Case Study →</div>
+      </div>
+    </a>
+    <a class="work-card" href="#">
+      <div class="card-visual">
+        <div class="flow-bg">🌿</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tags">
+          <span class="tag">Mobile App</span>
+          <span class="tag">Wellness</span>
+        </div>
+        <div class="card-title">FlowState — Habit Tracker App</div>
+        <div class="card-desc">A minimal habit-tracking app for people building sustainable wellness routines. Focused on reducing cognitive load through calm, intentional UI.</div>
+        <div class="card-arrow">View Project →</div>
+      </div>
+    </a>
+    <a class="work-card" href="#">
+      <div class="card-visual">
+        <div class="bloom-bg">🌸</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tags">
+          <span class="tag">Brand Identity</span>
+          <span class="tag">Web Design</span>
+        </div>
+        <div class="card-title">Bloom — Florist Brand & Website</div>
+        <div class="card-desc">Visual identity and website redesign for a boutique florist. Elevated the brand from generic to editorial, resulting in a 40% increase in online enquiries.</div>
+        <div class="card-arrow">View Project →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Let's work together.</h2>
+  <a href="mailto:3246312897@qq.com" class="contact-email">3246312897@qq.com</a>
+  <p style="color:var(--muted); font-size:14px; margin-bottom:32px">Open to junior roles, internships, and freelance projects.</p>
+  <div class="contact-links">
+    <a href="https://linkedin.com" class="contact-link" target="_blank">↗ LinkedIn</a>
+    <a href="https://behance.net" class="contact-link" target="_blank">↗ Behance</a>
+    <a href="#" class="contact-link">↓ Download Resume</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Jiale Tao — UX/UI Designer</span>
+  <span>Built with intention ✦</span>
+</footer>
+
+</body>
+</html>
